@@ -1,3 +1,23 @@
+<?php
+	include_once 'dbconfig.php';
+	if(isset($_POST['submit']))
+		{
+			// variables for input data
+			$name = $_POST['name'];
+			$nName = $_POST['nName'];
+		    $email = $_POST['email'];
+			$hAd = $_POST['hAd'];
+			$gender = $_POST['gender'];
+			$cNum = $_POST['cNum'];
+			$comment = $_POST['comment'];
+			// variables for input data
+			
+			// sql query for inserting data into database			 
+			$sql_query = "INSERT INTO users(name,nName,email,hAd,gender,cNum,message) VALUES ('$name','$nName','$email','$hAd','$gender','$cNum','$comment')";
+			mysqli_query($con,$sql_query);
+			// sql query for inserting data into database
+		}
+?>
 <!doctype>
 <html>
 <head>
