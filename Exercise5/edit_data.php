@@ -1,88 +1,138 @@
 <?php
-include_once 'dbconfig.php';
-if(isset($_GET['edit_id']))
-{
- $sql_query="SELECT * FROM users WHERE user_id=".$_GET['edit_id'];
- $result_set=mysqli_query($con,$sql_query);
- $fetched_row=mysqli_fetch_array($result_set);
-}
-if(isset($_POST['btn-update']))
-{
- // variables for input data
- $first_name = $_POST['first_name'];
- $last_name = $_POST['last_name'];
- $city_name = $_POST['city_name'];
- // variables for input data
+	include_once 'dbconfig.php';
+	if(isset($_GET['edit_id']))
+	{
+		$sql_query="SELECT * FROM users WHERE user_id=".$_GET['edit_id'];
+		$result_set=mysqli_query($con,$sql_query);
+		$fetched_row=mysqli_fetch_array($result_set);
+	}
+	if(isset($_POST['btn-update']))
+	{
+		// variables for input data
+		$name = $_POST['name'];
+		$nName = $_POST['nName'];
+		$email = $_POST['email'];
+		$hAd = $_POST['hAd'];
+		$gender = $_POST['gender'];
+		$cNum = $_POST['cNum'];
+		$comment = $_POST['comment'];
+		// variables for input data
 
- // sql query for update data into database
- $sql_query = "UPDATE users SET first_name='$first_name',last_name='$last_name',user_city='$city_name' WHERE user_id=".$_GET['edit_id'];
- // sql query for update data into database
- 
- // sql query execution function
- if(mysqli_query($con,$sql_query))
- {
-  ?>
-  <script type="text/javascript">
-  alert('Data Are Updated Successfully');
-  window.location.href='index.php';
-  </script>
-  <?php
- }
- else
- {
-  ?>
-  <script type="text/javascript">
-  alert('error occured while updating data');
-  </script>
-  <?php
- }
- // sql query execution function
-}
-if(isset($_POST['btn-cancel']))
-{
- header("Location: index.php");
-}
+		// sql query for update data into database
+		$sql_query = "UPDATE users SET name = '$name' , nName = '$nName' , email = '$email' , 
+		hAd = '$hAd' , gender = '$gender' , cNum = '$cNum' , message = '$comment' WHERE user_id=".$_GET['edit_id'];
+		// sql query for update data into database
+		 
+		// sql query execution function
+		if(mysqli_query($con,$sql_query))
+		{
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>CRUD Operations With PHP and MySql - By Cleartuts</title>
-<link rel="stylesheet" href="style.css" type="text/css" />
-</head>
-<body>
-<center>
-
-<div id="header">
- <div id="content">
-    <label>Edit Data</label>
-    </div>
-</div>
-
-<div id="body">
- <div id="content">
-    <form method="post">
-    <table align="center">
-    <tr>
-    <td><input type="text" name="first_name" placeholder="First Name" value="<?php echo $fetched_row['first_name']; ?>" required /></td>
-    </tr>
-    <tr>
-    <td><input type="text" name="last_name" placeholder="Last Name" value="<?php echo $fetched_row['last_name']; ?>" required /></td>
-    </tr>
-    <tr>
-    <td><input type="text" name="city_name" placeholder="City" value="<?php echo $fetched_row['user_city']; ?>" required /></td>
-    </tr>
-    <tr>
-    <td>
-    <button type="submit" name="btn-update"><strong>UPDATE</strong></button>
-    <button type="submit" name="btn-cancel"><strong>CANCEL</strong></button>
-    </td>
-    </tr>
-    </table>
-    </form>
-    </div>
-</div>
-
-</center>
-</body>
-</html>
+			<script type="text/javascript">
+				alert('SUCCESFULLY UPDATED');
+				window.location.href='index.php';
+			</script>
+			<?php
+		}
+		else
+		{
+			?>
+			<script type="text/javascript">
+				alert('ERROR OCCURRED');
+			</script>
+			<?php
+		}
+		// sql query execution function
+	}
+		if(isset($_POST['btn-cancel']))
+	{
+		header("Location: index.php");
+	}
+?>
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<title>UPDATE</title>
+			<style>
+				label{
+					font-family: Times New Roman;
+					font-size: 50px;
+					color: white;
+				}
+	
+				input{
+					font-family: Times New Roman;
+					font-size: 32px;
+				}
+				
+				button{
+					background-color: white;
+					color: black;
+					border: white;
+					font-family: Times New Roman;
+					font-size: 32px;
+					text-align: center;
+				}
+				
+				button:hover{
+					background-color: white;
+					color: red;
+				}
+	
+				.lft{
+					font-family: Times New Roman;
+					font-size: 23px;
+					display: inline-block;
+					width: 150px;
+					clear: both;
+					text-align: right;
+				}
+				
+				content.input{
+					width: 100%;
+					clear: both;
+				}
+				b{
+					color: white;
+				}
+			</style>
+		</head>
+			<body bgcolor="black">
+				<center>
+					<label>Edit your message!</label>
+					<br><br>
+					<hr>
+					<div id="content">
+						<form method="post">
+							<b class="lft">NAME</b>
+								<input type="text" name="name" value="<?php echo $fetched_row['name']; ?>"/></br></br>
+	
+							<b class="lft">NICKNAME</b>
+								<input type="text" name="nName" value="<?php echo $fetched_row['nName']; ?>"/></br></br>
+    
+							<b class="lft">EMAIL</b>
+								<input type="text" name="email" value="<?php echo $fetched_row['email']; ?>" /></br></br>
+	
+							<b class="lft">HOME ADDRESS</b>
+								<input type="text" name="hAd" value="<?php echo $fetched_row['hAd']; ?>"  /></br></br>
+	
+							<b class="lft">GENDER</b>
+								<input type="text" name="gender" value="<?php echo $fetched_row['gender']; ?>"  /></br></br>
+	
+							<b class="lft">CELLPHONE NUMBER</b>
+								<input type="text" name="cNum" value="<?php echo $fetched_row['cNum']; ?>"  /></br></br>
+	
+							<b class="lft">COMMENT</b>
+								<input type="text" name="comment" value="<?php echo $fetched_row['message']; ?>"  /><br><br>
+						
+							<table align="center">
+								<td>								
+								<button type="submit" name="btn-update"><strong>UPDATE</strong></button>
+								<button type="submit" name="btn-cancel"><strong>CANCEL</strong></button>
+								</td>
+							</table>
+						</form>
+					</div>
+				</center>
+			</body>
+	</html>

@@ -39,7 +39,7 @@
 				}
 				
 				a:link{
-					color: black;
+					color: white;
 					background-color: transparent;
 					text-decoration: none;
 					
@@ -54,10 +54,12 @@
 				
 				th{
 					padding:0 35px 0 35px;
+					color: white;
 				}
 				
 				tr{
 					text-align: center;
+					color: white;
 				}
 				
 				.link{
@@ -72,7 +74,7 @@
 		<body bgcolor="black">
 			<center>
 			<div class="link">
-				<a href="mypage.php">MAIN PAGE</a>
+				<a href="WebProg.php">MAIN PAGE</a>
 			</div>
 			<label>Messages</label>
 			<br><br>
