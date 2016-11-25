@@ -28,6 +28,7 @@
 		<th bgcolor="E2E5E7"><font face="Georgia"  color="646464">INTEREST</font></th>
 		<th bgcolor="E2E5E7"><font face="Georgia">Dancing</font></th>
 </table>
+<hr>
 
 <font color="white" font face="Times New Roman" size="4">
 <p>1. What is my favorite food?</p>
@@ -56,60 +57,113 @@ Click me! </button>
 Click me! </button>
 <br>
 <br>
+		<?php
+			$nameErr = $nNameErr = $emailErr = $genderErr = $cNumErr = $commentErr = "";
+			$name = $nName = $email = $hAd = $gender = $cNum = $comment = "";
 
-<?php
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				if (empty($_POST["name"])) {
+				$nameErr = "NAME IS REQUIRED ";
+			} else {
+				$name = test_input($_POST["name"]);
+				if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+				$nameErr = "ONLY LETTERS ARE ALLOWED DUDE"; 
+				}
+			}
+		  
+			if (empty($_POST["nName"])) {
+				$nNameErr = "NICKNAME IS REQUIRED ";
+			} else {
+				$nName = test_input($_POST["nName"]);
+				if (!preg_match("/^[a-zA-Z ]*$/",$nName)) {
+				$nNameErr = "ONLY LETTERS ARE ALLOWED DUDE"; 
+				}
+			}
+		  
+			if (empty($_POST["email"])) {
+				$emailErr = "E-MAIL IS REQUIRED MAYNE";
+			} else {
+				$email = test_input($_POST["email"]);
+				if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				$emailErr = "INVALID EMAIL FORMAT MAYNE"; 
+				}
+			}
+		  
+			if (empty($_POST["hAd"])) {
+				$hAd = "";
+			} else {
+				$hAd = test_input($_POST["hAd"]);
+			}
+		  
+			if (empty($_POST["gender"])) {
+				$genderErr = "GENDER IS REQUIRED";
+			} else {
+				$gender = test_input($_POST["gender"]);
+			}
+		  
+			if (empty($_POST["cNum"])) {
+				$cNumErr = "NUMBER IS REQUIRED";
+			} else {
+				$cNum = test_input($_POST["cNum"]);
+				if (!filter_var($cNum, FILTER_VALIDATE_INT) === FALSE) {
+				$cNumErr = "NUMBERS ONLY MAYNE"; 
+				}
+			}
+		  
+			if (empty($_POST["comment"])) {
+				$comment = "";
+			} else {
+				$comment = test_input($_POST["comment"]);
+				}
+			}
 
-$name = $email = $gender = $comment = $website = "";
+			function test_input($data) {
+			$data = trim($data);
+			$data = stripslashes($data);
+			$data = htmlspecialchars($data);
+			return $data;
+			}
+		?>
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = test_input($_POST["name"]);
-  $email = test_input($_POST["email"]);
-  $website = test_input($_POST["website"]);
-  $comment = test_input($_POST["comment"]);
-  $gender = test_input($_POST["gender"]);
-}
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-?>
-
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Name: <input type="text" name="name">
-  <br><br>
-  E-mail: <input type="text" name="email">
-  <br><br>
-  Website: <input type="text" name="website">
-  <br><br>
-  Comment: <textarea name="comment" rows="5" cols="40"></textarea>
-  <br><br>
-  Gender:
-  <input type="radio" name="gender" value="female">Female
-  <input type="radio" name="gender" value="male">Male
-  <br><br>
-  <input type="submit" name="submit" value="Submit">  
-</form>
-
-<?php
-echo "<h2>Your Input:</h2>";
-echo $name;
-echo "<br>";
-echo $email;
-echo "<br>";
-echo $website;
-echo "<br>";
-echo $comment;
-echo "<br>";
-echo $gender;
-?>
-
-
-
-
-
+<form method="post" >
+			<div class="input">
+				<div class="col1">
+					NAME:
+						<input type="text"  name="name" value="<?php echo $name;?>">
+						<span class="error"> <?php echo $nameErr;?></span>
+						<br><br>
+					NICKNAME:
+						<input type="text" name="nName" value="<?php echo $nName;?>">
+						<span class="error"> <?php echo $nNameErr;?></span>
+						<br><br>
+					E-MAIL: 
+						<input type="text" name="email" value="<?php echo $email;?>">
+						<span class="error"> <?php echo $emailErr;?></span>
+						<br><br>
+					ADDRESS: 
+					<textarea name="hAd" rows="3" cols="35"><?php echo $hAd;?></textarea>
+				</div>
+				<div class="col2">
+					GENDER:
+						<input type="radio" name="gender" value="FEMALE"/>FEMALE
+						<input type="radio" name="gender" value="MALE"/>MALE
+						<span class="error"> <?php echo $genderErr;?></span>					
+						<br><br>
+					CELLPHONE NUMBER:
+						<input type="cNum" name="cNum" value="<?php echo $cNum;?>">
+						<span class="error"> <?php echo $cNumErr;?></span>
+						<br><br>
+					COMMENT:
+						<textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
+						<br><br>
+				</div>
+			</div>
+			
+			<input type="submit" name="submit" value="SUBMIT" 
+			style="background-color: white; color: red; border: white; font-family: simplifica; font-size: 35px; ">
+			
+		</form>
+		<a href="index.php" class=button>MESSAGES ARE HERE DUDE!</a>
+	</body>
 </body>
 </html>

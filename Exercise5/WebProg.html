@@ -28,6 +28,7 @@
 		<th bgcolor="E2E5E7"><font face="Georgia"  color="646464">INTEREST</font></th>
 		<th bgcolor="E2E5E7"><font face="Georgia">Dancing</font></th>
 </table>
+<hr>
 
 <font color="white" font face="Times New Roman" size="4">
 <p>1. What is my favorite food?</p>
@@ -52,43 +53,21 @@ Click me! </button>
 
 <p>5. What is my favorite animal?</p>
 <p id="animal">__________</p>
-<button type="button" oncl
+<button type="button" onclick="document.getElementById('animal').innerHTML = '-Dinosaur'">
+Click me! </button>
+<br>
+<br>
 
 <?php
-// define variables and set to empty values
-$nameErr = $emailErr = $genderErr = $websiteErr = "";
+
 $name = $email = $gender = $comment = $website = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["name"])) {
-    $nameErr = "Name is required";
-  } else {
-    $name = test_input($_POST["name"]);
-  }
-  
-  if (empty($_POST["email"])) {
-    $emailErr = "Email is required";
-  } else {
-    $email = test_input($_POST["email"]);
-  }
-    
-  if (empty($_POST["website"])) {
-    $website = "";
-  } else {
-    $website = test_input($_POST["website"]);
-  }
-
-  if (empty($_POST["comment"])) {
-    $comment = "";
-  } else {
-    $comment = test_input($_POST["comment"]);
-  }
-
-  if (empty($_POST["gender"])) {
-    $genderErr = "Gender is required";
-  } else {
-    $gender = test_input($_POST["gender"]);
-  }
+  $name = test_input($_POST["name"]);
+  $email = test_input($_POST["email"]);
+  $website = test_input($_POST["website"]);
+  $comment = test_input($_POST["comment"]);
+  $gender = test_input($_POST["gender"]);
 }
 
 function test_input($data) {
@@ -99,48 +78,45 @@ function test_input($data) {
 }
 ?>
 
-
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
-  Name: <input type="text" name="name">
-  <span class="error">* <?php echo $nameErr;?></span>
-  <br><br>
-  E-mail: <input type="text" name="email">
-  <span class="error">* <?php echo $emailErr;?></span>
-  <br><br>
-  Website: <input type="text" name="website">
-  <span class="error"><?php echo $websiteErr;?></span>
-  <br><br>
-  Comment: <textarea name="comment" rows="5" cols="40"></textarea>
-  <br><br>
-  Gender:
-  <input type="radio" name="gender" value="female">Female
-  <input type="radio" name="gender" value="male">Male
-  <span class="error">* <?php echo $genderErr;?></span>
-  <br><br>
-  <input type="submit" name="submit" value="Submit">  
-</form>
-
-<?php
-echo "<h2>Your Input:</h2>";
-echo $name;
-echo "<br>";
-echo $email;
-echo "<br>";
-echo $website;
-echo "<br>";
-echo $comment;
-echo "<br>";
-echo $gender;
-?>
-
-
-
-
-
-
-
-
-
+<form method="post" >
+			<div class="input">
+				<div class="col1">
+					NAME:
+						<input type="text"  name="name" value="<?php echo $name;?>">
+						<span class="error"> <?php echo $nameErr;?></span>
+						<br><br>
+					NICKNAME:
+						<input type="text" name="nName" value="<?php echo $nName;?>">
+						<span class="error"> <?php echo $nNameErr;?></span>
+						<br><br>
+					E-MAIL: 
+						<input type="text" name="email" value="<?php echo $email;?>">
+						<span class="error"> <?php echo $emailErr;?></span>
+						<br><br>
+					ADDRESS: 
+					<textarea name="hAd" rows="3" cols="35"><?php echo $hAd;?></textarea>
+				</div>
+				<div class="col2">
+					GENDER:
+						<input type="radio" name="gender" value="FEMALE"/>FEMALE
+						<input type="radio" name="gender" value="MALE"/>MALE
+						<span class="error"> <?php echo $genderErr;?></span>					
+						<br><br>
+					CELLPHONE NUMBER:
+						<input type="cNum" name="cNum" value="<?php echo $cNum;?>">
+						<span class="error"> <?php echo $cNumErr;?></span>
+						<br><br>
+					COMMENT:
+						<textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
+						<br><br>
+				</div>
+			</div>
+			
+			<input type="submit" name="submit" value="SUBMIT" 
+			style="background-color: white; color: red; border: white; font-family: simplifica; font-size: 35px; ">
+			
+		</form>
+		<a href="index.php" class=button>Message are here bruh!</a>
+	</body>
 </body>
 </html>
