@@ -51,7 +51,7 @@
 <hr>
 
 <font color="white" font face="Times New Roman" size="4">
-<p>1. What is my favorite d?</p>
+<p>1. What is my favorite da?</p>
 <p id="food">__________</p>
 <button type="button" onclick="document.getElementById('food').innerHTML = '-Sinigang'">
 Click me! </button>
